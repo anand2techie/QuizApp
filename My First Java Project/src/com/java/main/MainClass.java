@@ -11,7 +11,7 @@ public class MainClass {
 		// TODO Auto-generated method stub
 		
 		//calling a method
-		
+		System.out.println("Inside main");
 		//creating an object: classname objname=new constructorname();
 		MainClass mainClass=new MainClass();
 		
