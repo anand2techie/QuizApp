@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 public class DemoApplication  extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
-		System.out.println("inside main");
+		System.out.println("inside main d");
 		SpringApplication.run(DemoApplication.class, args);
 	}
 	
