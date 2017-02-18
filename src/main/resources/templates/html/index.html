@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+<head>
+<style>
+.usersTable {
+    border-collapse: collapse;
+}
+
+.usersTable, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<script>
+
+$(document).ready(function(){
+	
+	$.ajax({
+		type : "GET",
+		contentType : "application/json",
+		url : "/persons",
+		dataType : 'json',
+		success : function(data) {
+			console.log("SUCCESS: ", data);
+			var personsArray= data._embedded.persons;
+			
+			var tableData='';
+			$.each(personsArray, function( index, value ) {
+				console.log(value.firstName);
+				console.log(value.lastName);
+				tableData=tableData+'<tr><td>'+value.firstName+'</td> <td>'+value.lastName+'</td></tr>';
+				});
+			
+			console.log(tableData)
+			$('#usersTable').append(tableData);
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		},
+		done : function(e) {
+			console.log("DONE");
+		}
+	});
+
+});
+</script>
+</head>
+
+<body>
+
+<a href="" data-link="./fileUpload.html">Test</a>
+ 
+<!-- <table id="usersTable" class="usersTable table-striped table-bordered">
+ <tr>
+   <th>First Name</th>
+   <th>Last Name</th>
+ </tr>
+  
+</table> -->
+ </body>
+</html>
