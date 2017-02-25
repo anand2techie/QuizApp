@@ -1,4 +1,4 @@
-package com.example;
+package com.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +8,12 @@ public class HelloController {
 
     @RequestMapping("/index")
     public String index() {
-        return "html/fileUpload";
+        return "html/index";
+    }
+
+    @RequestMapping("/searchUser")
+    public String searchUser() {
+        return "html/searchUser";
     }
 
 }

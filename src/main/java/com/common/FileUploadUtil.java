@@ -1,4 +1,4 @@
-package com.example;
+package com.common;
 
 public class FileUploadUtil {
 	

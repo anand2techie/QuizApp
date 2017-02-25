@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+
+<head>
+<style>
+.usersTable {
+    border-collapse: collapse;
+}
+
+.usersTable, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<script>
+
+$(document).ready(function(){
+	
+	$('#searchUser').click(function(){
+		var username=$('#username').val();
+		
+		 $.ajax({
+				type : "GET",
+				contentType : "application/json",
+				url : "/persons/search/findByFirstName?firstName="+username,
+				dataType : 'json',
+				success : function(data) {
+					var personsArray=data._embedded.persons;
+					
+					if(personsArray.length!==0)
+						{
+						$('#searchResponse').html('Below are the search results');
+				    	$('#searchResponse').css('color','green');
+				    	
+						var tableData='<table id="usersTable" class="usersTable table-striped table-bordered"><tr><th>First Name</th><th>Last Name</th></tr>';
+						$.each(personsArray, function( index, value ) {
+							console.log(value.firstName);
+							console.log(value.lastName);
+							tableData=tableData+'<tr><td>'+value.firstName+'</td> <td>'+value.lastName+'</td></tr>';
+							});
+						tableData=tableData+'</table>';
+						$('#usersResultsDiv').append(tableData);
+						}
+					else
+						{
+						$('#searchResponse').html('No Results found.');
+				    	$('#searchResponse').css('color','red');
+				    	}
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				},
+				done : function(e) {
+					console.log("DONE");
+				}
+			});
+	});
+	
+});
+</script>
+</head>
+
+<body>
+
+<input type="text" id="username"/> <input type="button" value="Search" id="searchUser"/>
+<br/>
+<span id="searchResponse"></span>
+<br/>
+<div id="usersResultsDiv"></div>
+
+ </body>
+</html>
